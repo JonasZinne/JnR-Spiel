@@ -1,68 +1,11 @@
 import pygame, random, time
-
-pygame.init()
+from player import Player
+from obstacle import *
+from constants import *
 
 VERSION = 0.7
-black, white, green, red, blue = (0, 0, 0), (255, 255, 255), (0, 255, 0), (255, 0, 0), (0, 0, 255)
 
-# Window settings
-screen_width, screen_height = 1300, 800
-screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("Jump and Run Game - Made by Jonas")
-
-# constant
-GROUND_HEIGHT = 700
-
-PLAYER_SPEED = 16 # Level
-JUMP_HEIGHT = 16 # Level
-GRAVITY = 0.7
-PLAYER_START_X = 100
-
-NUM_OBSTACLES = 101
-MIN_DISTANCE = 150
-MAX_DISTANCE = 500
-OBSTACLE_START_X = 800
-
-# Player
-class Player(pygame.sprite.Sprite):
-    def __init__(self):
-        super().__init__()
-        self.image = pygame.image.load("player.png").convert_alpha()
-        self.rect = self.image.get_rect(center=(PLAYER_START_X, GROUND_HEIGHT))
-        self.velocity = 0
-
-    def move(self):
-        self.velocity += GRAVITY
-        self.rect.y += self.velocity
-        if self.rect.bottom >= GROUND_HEIGHT:
-            self.rect.bottom = GROUND_HEIGHT
-            self.velocity = 0
-
-        left_border = pygame.Rect(-50, 0, 10, screen_height)
-
-        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-            if player.rect.left > left_border.right:
-                player.rect.x -= PLAYER_SPEED
-        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-            self.rect.x += PLAYER_SPEED
-        if keys[pygame.K_SPACE]:
-            player.jump()
-
-    def jump(self):
-        if self.rect.bottom == GROUND_HEIGHT:
-            self.velocity -= JUMP_HEIGHT
-
-player = Player()
-
-# Obstacle
-class Obstacle(pygame.sprite.Sprite):
-    def __init__(self, x, y):
-        super().__init__()
-        self.image = pygame.image.load("obstacle.png").convert_alpha()
-        self.rect = self.image.get_rect(topleft=(x, y - 100))
-
-obstacle_x_positions = []
-obstacle_group = pygame.sprite.Group()
+pygame.init()
 
 # Static texts
 start_text = pygame.font.SysFont(None, 100).render("Klicke, um das Spiel zu starten", True, black)
@@ -79,20 +22,12 @@ level = 1
 level_text = pygame.font.SysFont(None, 100).render("Level: " + str(level), True, black)
 level_text_rect = level_text.get_rect(center=(screen_width // 2, 150))
 
-# create obstacles
-for i in range(NUM_OBSTACLES):
-    if i == 0:
-        x = OBSTACLE_START_X
-    else:
-        x = obstacle_x_positions[i - 1] + random.randint(MIN_DISTANCE, MAX_DISTANCE)
-
-    obstacle_x_positions.append(x)
-    obstacle_group.add(Obstacle(x, GROUND_HEIGHT))
-
 # Game Loop
-clock = pygame.time.Clock()
 game_running, game_started = True, False
 camera_x = 0
+player = Player()
+obstacle_group = create_obstacles()
+clock = pygame.time.Clock()
 
 while game_running:
     for event in pygame.event.get():
@@ -110,7 +45,6 @@ while game_running:
 
     # Game-Update
     screen.fill((173, 216, 230)) # Background
-    keys = pygame.key.get_pressed()
     player.move()
 
     # Contact with obstacle
