@@ -3,7 +3,7 @@ from player import Player
 from obstacle import *
 from constants import *
 
-VERSION = 0.8
+VERSION = 0.81
 
 pygame.init()
 
@@ -21,6 +21,9 @@ level_text_rect = level_text.get_rect(center=(screen_width // 2, 150))
 
 version_text = pygame.font.SysFont(None, 25).render("Version: " + str(VERSION), True, black)
 version_text_rect = version_text.get_rect(bottomleft=(10, screen_height - 10))
+
+credits_text = pygame.font.SysFont(None, 25).render("Credits: Clarala (Zeichnungen) und Antonius (Testen)", True, black)
+credits_text_rect = credits_text.get_rect(bottomright=(screen_width - 10, screen_height - 10))
 
 def new_game():
     global game_running, game_started, score, level
@@ -60,6 +63,7 @@ while game_running:
         screen.fill((173, 216, 230))
         screen.blit(start_text, start_text_rect)
         screen.blit(version_text, version_text_rect)
+        screen.blit(credits_text, credits_text_rect)
         pygame.display.update()
         continue
 
