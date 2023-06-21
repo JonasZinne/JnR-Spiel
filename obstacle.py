@@ -5,7 +5,7 @@ from constants import *
 class Obstacle(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
-        self.image = pygame.image.load("obstacle.png").convert_alpha()
+        self.image = pygame.image.load("Pictures\obstacle.png").convert_alpha()
         self.rect = self.image.get_rect(topleft=(x, y - 100))
 
 obstacle_x_positions = []
