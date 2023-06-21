@@ -1,15 +1,17 @@
 import pygame
 
+pygame.init()
+
 # Window settings
 screen_width, screen_height = 1300, 800
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Jump and Run Game - Made by Jonas")
 
-# constant
+# constants
 GROUND_HEIGHT = 700
 
-PLAYER_SPEED = 16 # level
-JUMP_HEIGHT = 16 # level
+PLAYER_SPEED = 16 # Level 1
+JUMP_HEIGHT = 16 # Level 1
 GRAVITY = 0.7
 PLAYER_START_X = 100
 
