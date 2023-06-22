@@ -3,7 +3,7 @@ from player import Player
 from obstacle import *
 from constants import *
 
-VERSION = 0.87
+VERSION = 0.88
 
 pygame.init()
 
@@ -118,7 +118,7 @@ def new_game(score, level):
     pygame.init()
     show_menu(score, level)
 
-def show_menu():
+def show_menu(score, level):
     menu = pygame_menu.Menu('Hauptmenü', screen_width, screen_height, theme=pygame_menu.themes.THEME_DARK)
 
     # Buttons
@@ -126,7 +126,7 @@ def show_menu():
     quit_button = menu.add.button('Beenden', pygame_menu.events.EXIT, font_color=red, font_size=80, button_id='quit_button')
 
     # Score und Level
-    score_level_text = menu.add.label("Score: 65    Level: 3", font_size=50, font_color=yellow)
+    score_level_text = menu.add.label("Score: " + str(score) + "   Level: " + str(level), font_size=50, font_color=yellow)
     score_level_text.set_margin(0, 130)
     score_level_text.set_padding(20)
 
@@ -135,7 +135,7 @@ def show_menu():
     credits_text.set_margin(0, 20)
 
     # Version
-    version_text = menu.add.label("Version: 0.86", font_size=25, font_color=white, align=pygame_menu.locals.ALIGN_CENTER)
+    version_text = menu.add.label("Version: " + str(VERSION), font_size=25, font_color=white, align=pygame_menu.locals.ALIGN_CENTER)
     version_text.set_margin(0, 10)
 
     # Button Styling
