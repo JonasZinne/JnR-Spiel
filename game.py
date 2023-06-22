@@ -3,7 +3,7 @@ from player import Player
 from obstacle import *
 from constants import *
 
-VERSION = 0.85
+VERSION = 0.86
 
 pygame.init()
 
