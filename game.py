@@ -3,7 +3,7 @@ from player import Player
 from obstacle import *
 from constants import *
 
-VERSION = 0.86
+VERSION = 0.87
 
 pygame.init()
 
@@ -118,15 +118,29 @@ def new_game(score, level):
     pygame.init()
     show_menu(score, level)
 
-def show_menu(score, level):
-    menu = pygame_menu.Menu('Hauptmenü', 1300, 800)
-    menu.add.button('Spiel starten', start_game, font_color=green, font_size=100)
-    menu.add.button('Beenden', pygame_menu.events.EXIT, font_color=red, font_size=100)
+def show_menu():
+    menu = pygame_menu.Menu('Hauptmenü', screen_width, screen_height, theme=pygame_menu.themes.THEME_DARK)
 
-    menu.add.label("Score: " + str(score) + "   Level: " + str(level), font_color=white, font_size=50)
+    # Buttons
+    start_button = menu.add.button('Spiel starten', start_game, font_color=green, font_size=80, button_id='start_button')
+    quit_button = menu.add.button('Beenden', pygame_menu.events.EXIT, font_color=red, font_size=80, button_id='quit_button')
 
-    menu.add.label("Version: " + str(VERSION), font_color=black, font_size=25, align=pygame_menu.locals.ALIGN_LEFT)
-    menu.add.label("Credits: Clarala für die krassen Zeichnungen", font_color=black, font_size=25, align=pygame_menu.locals.ALIGN_RIGHT)
+    # Score und Level
+    score_level_text = menu.add.label("Score: 65    Level: 3", font_size=50, font_color=yellow)
+    score_level_text.set_margin(0, 130)
+    score_level_text.set_padding(20)
+
+    # Credits
+    credits_text = menu.add.label("Credits: Clarala für die krassen Zeichnungen", font_size=25, font_color=white, align=pygame_menu.locals.ALIGN_CENTER)
+    credits_text.set_margin(0, 20)
+
+    # Version
+    version_text = menu.add.label("Version: 0.86", font_size=25, font_color=white, align=pygame_menu.locals.ALIGN_CENTER)
+    version_text.set_margin(0, 10)
+
+    # Button Styling
+    start_button.set_margin(0, 20)
+    quit_button.set_margin(0, 50)
 
     menu.mainloop(screen)
 
