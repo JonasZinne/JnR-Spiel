@@ -1,5 +1,7 @@
 import pygame
 
+# Version 1.0
+
 pygame.init()
 
 # Window settings
