@@ -2,6 +2,8 @@ import pygame
 import random
 from constants import *
 
+# Version 1.0
+
 class Obstacle(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
