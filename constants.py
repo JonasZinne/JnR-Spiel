@@ -20,7 +20,7 @@ MIN_DISTANCE = 150
 MAX_DISTANCE = 500
 OBSTACLE_START_X = 800
 
-# colours
+# colors
 black = (0, 0, 0)
 white = (255, 255, 255)
 green = (0, 255, 0)
@@ -30,3 +30,6 @@ gray = (128, 128, 128)
 yellow = (255, 255, 0)
 magenta = (255, 0, 255)
 cyan = (0, 238, 238)
+
+game_background_color = (173, 216, 230)
+menu_background_color = (41, 41, 41)
