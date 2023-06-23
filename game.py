@@ -3,7 +3,7 @@ from player import Player
 from obstacle import *
 from constants import *
 
-VERSION = 0.91
+VERSION = 0.95
 
 pygame.init()
 
@@ -119,28 +119,33 @@ def new_game(score, level):
     show_menu(score, level)
 
 def show_menu(score, level):
-    menu = pygame_menu.Menu('Hauptmenü', screen_width, screen_height, theme=pygame_menu.themes.THEME_DARK)
+    menu_theme = pygame_menu.themes.Theme(
+        background_color=(41, 41, 41),
+        title_background_color=(0, 0, 0),
+        title_font_color=(255, 255, 255),
+        title_offset = (380, 0),
+        title_font_size=100,
+        title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_SIMPLE
+    )
 
-    # Buttons
+    # create menu
+    menu = pygame_menu.Menu('Hauptmenü', screen_width, screen_height, theme=menu_theme)
+
     start_button = menu.add.button('Spiel starten', start_game, font_color=green, selection_color=green, font_size=80, button_id='start_button')
     quit_button = menu.add.button('Beenden', pygame_menu.events.EXIT, font_color=red, selection_color=red, font_size=80, button_id='quit_button')
 
-    # Score und Level
     score_level_text = menu.add.label("Score: " + str(score) + "   Level: " + str(level), font_size=50, font_color=cyan)
-    score_level_text.set_margin(0, 150)
-    score_level_text.set_padding(20)
 
-    # Credits
     credits_text = menu.add.label("Credits: Clarala für die krassen Zeichnungen", font_size=25, font_color=white, align=pygame_menu.locals.ALIGN_CENTER)
-    credits_text.set_margin(0, 20)
 
-    # Version
-    version_text = menu.add.label("Version: " + str(VERSION), font_size=25, font_color=white, align=pygame_menu.locals.ALIGN_CENTER)
-    version_text.set_margin(0, 10)
+    menu.add.label("Version: " + str(VERSION), font_size=25, font_color=white, align=pygame_menu.locals.ALIGN_CENTER)
 
-    # Button Styling
-    start_button.set_margin(0, 20)
-    quit_button.set_margin(0, 50)
+    # styling
+    start_button.set_margin(0, 10)
+    quit_button.set_margin(0, 70)
+
+    score_level_text.set_margin(0, 100)
+    credits_text.set_margin(0, 10)   
 
     menu.mainloop(screen)
 
