@@ -3,7 +3,7 @@ from player import Player
 from obstacle import *
 from constants import *
 
-VERSION = 0.96
+VERSION = 0.97
 
 pygame.init()
 
@@ -52,7 +52,7 @@ def start_game():
         screen.blit(ground_image, (0, GROUND_HEIGHT))
 
         # Increase score and level
-        if player.rect.left > obstacle_x_positions[score]:
+        if player.rect.right > obstacle_x_positions[score]:
             score += 1
             score_text = pygame.font.SysFont(None, 150).render("Score: " + str(score), True, black)
 
