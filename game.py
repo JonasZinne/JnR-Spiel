@@ -3,7 +3,7 @@ from player import Player
 from obstacle import *
 from constants import *
 
-VERSION = 0.95
+VERSION = 0.96
 
 pygame.init()
 
@@ -27,7 +27,7 @@ def start_game():
                 show_menu(score, level)
 
         # Game-Update
-        screen.fill((173, 216, 230)) # Background
+        screen.fill((game_background_color))
         player.move()
 
         # Contact with obstacle
@@ -120,9 +120,9 @@ def new_game(score, level):
 
 def show_menu(score, level):
     menu_theme = pygame_menu.themes.Theme(
-        background_color=(41, 41, 41),
-        title_background_color=(0, 0, 0),
-        title_font_color=(255, 255, 255),
+        background_color=(menu_background_color),
+        title_background_color=(black),
+        title_font_color=(white),
         title_offset = (380, 0),
         title_font_size=100,
         title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_SIMPLE
